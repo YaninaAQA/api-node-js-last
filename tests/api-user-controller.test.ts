@@ -11,7 +11,7 @@ test.describe('User management API tests with API client', () => {
     test.beforeEach(async ({ request }) => {
         // Ensure a clean state by deleting all users before each test
         await apiClient.deleteAllUsers(request);
-    });
+    })
 
     test('Delete all users and verify all are deleted', async ({ request }) => {
         await apiClient.deleteAllUsers(request);
@@ -19,7 +19,7 @@ test.describe('User management API tests with API client', () => {
         expect(response.status()).toBe(200);
         const responseBody = await response.json();
         expect(responseBody).toEqual([]);
-    });
+    })
 
     test('Create users and verify count', async ({ request }) => {
         const numberOfUsers = 4;
@@ -33,7 +33,7 @@ test.describe('User management API tests with API client', () => {
         const response = await request.get(baseURL);
         const responseBody: Array<any> = await response.json();
         expect(responseBody).toHaveLength(numberOfUsers);
-    });
+    })
 
     test('Create and delete a user, verify non-existence', async ({ request }) => {
         const user = await apiClient.createUser(request);
@@ -42,7 +42,7 @@ test.describe('User management API tests with API client', () => {
 
         const fetchedUser = await apiClient.getUserById(request, user.id);
         expect(fetchedUser).toBeNull();
-    });
+    })
 
     test('Create multiple users, delete one, verify others exist', async ({ request }) => {
         const numberOfUsers = 4;
@@ -61,5 +61,5 @@ test.describe('User management API tests with API client', () => {
         const remainingUsers: Array<any> = await response.json();
         expect(remainingUsers).toHaveLength(numberOfUsers - 1);
         expect(remainingUsers.find(user => user.id === users[0].id)).toBeUndefined();
-    });
-});
+    })
+})
