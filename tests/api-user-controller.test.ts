@@ -30,9 +30,9 @@ test.describe('User management API tests with API client', () => {
             users.push(user);
         }
 
-        const response = await request.get(baseURL);
-        const responseBody: Array<any> = await response.json();
-        expect(responseBody).toHaveLength(numberOfUsers);
+        const response = await request.get(baseURL)
+        const responseBody: Array<any> = await response.json()
+        expect(responseBody).toHaveLength(numberOfUsers)
     })
 
     test('Create and delete a user, verify non-existence', async ({ request }) => {
