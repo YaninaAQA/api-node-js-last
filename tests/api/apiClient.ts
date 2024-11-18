@@ -20,6 +20,15 @@ export class ApiClient {
         return await response.json();
     }
 
+    async createUsers(request: APIRequestContext, numberOfUsers: number): Promise<User[]> {
+        const users: User[] = [];
+        for (let i = 0; i < numberOfUsers; i++) {
+            const user = await this.createUser(request);
+            users.push(user);
+        }
+        return users;
+    }
+
     async getUserById(request: APIRequestContext, userId: number): Promise<User | null> {
         const response = await request.get(`${this.baseURL}/${userId}`);
         if (response.status() === 404) {
